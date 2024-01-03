@@ -1,55 +1,40 @@
 <script setup>
-import { ref } from "vue";
 
-const counter = ref(0);
-
-//decrease function  if greater than 0
-function decrease(){
-  if(counter.value > 0){
-    counter.value--
-  }
-}
-
-//increase function if less then 10
-function increase(){
-  if(counter.value <10){
-    counter.value++
-  }
-}
 </script>
 
 <template>
-  <div class="h-screen flex items-center justify-center">
-    <div class="bg-white border-2 rounded-md shadow-lg  w-full max-w-xs">
-      <h1 class="text-center text-indigo-500 text-3xl pt-2">Counter</h1>
-      <p class="text-center text-sm text-indigo-400">counter from 0 to 10</p>
-      <div class="m-2 p-5">
-        <!--Counter-->
-        <div class="text-center py-4 border-2">
-          <p class="text-indigo-400 font-semibold text-3xl">{{ counter }}</p>
-        </div>
-        <!--Counter end-->
+  <main class="min-h-screen w-full py-20 px-5 flex items-center justify-center">
+    <!-- Slider wrapper -->
+    <div class="w-full max-w-md relative">
 
-        <!--Decrease button-->
-        <div class="flex mt-5 border-t">
-          <button @click="decrease()"
-            class="text-gray-400 text-3xl flex items-center justify-center border w-1/2 py-3 hover:bg-blue-100"
-          >
-            -</button
-          >
-          <!--Decrease button end-->
-
-          <!--Increase button-->
-          <button @click="increase()"
-            class="text-gray-400 text-3xl flex items-center justify-center border w-1/2 py-3 hover:bg-blue-100"
-          >
-            +</button
-          >
-          <!--Increase button end-->
-        
-        </div>
+      <!-- Single Slider -->
+      <div>
+        <img src="./assets/images/red_car.jpg" alt="car"
+             class="w-full h-56 object-cover rounded-md border-2 shadow">
+        <p class="text-center mt-3 text-indigo-500 text-2xl uppercase">
+          Red car
+        </p>
       </div>
-      
+      <!-- Single Slider end -->
+
+      <!-- Arrows prev -->
+      <button class="w-10 h-10 rounded-full bg-white hover:shadow-lg active:scale-90 transition absolute left-2 top-24 text-gray-700 flex items-center justify-center opacity-50 hover:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+        </svg>
+      </button>
+      <!-- Arrows prev end -->
+
+      <!-- Arrows next -->
+      <button class="w-10 h-10 rounded-full bg-white hover:shadow-lg active:scale-90 transition absolute right-2 top-24 text-gray-700 flex items-center justify-center opacity-50 hover:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+        </svg>
+      </button>
+      <!-- Arrows next end -->
+
     </div>
-  </div>
+  </main>
 </template>
