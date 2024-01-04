@@ -37,7 +37,7 @@ export const useStore = defineStore('alerts', {
     }),
     
     actions: {
-      addToCart(product){
+        addToCart(product){
         this.cart.push(product)
       }
     },

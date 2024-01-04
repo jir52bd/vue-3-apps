@@ -1,6 +1,6 @@
 <script setup>
 import { useStore } from "../store/store";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import router from "../router/index.js";
 
 const store = useStore()
@@ -12,9 +12,14 @@ const props = defineProps({
 const product = ref(store.products.find(prod => prod.id == props.id))
 console.log(product);
 
+const isInCart = computed(()=>{
+    return store.cart.find(item => item.id == props.id)?.quentity
+})
+
 function addToCart(){
-    store.addToCart({...product.value, quentity: 1})
+    store.addToCart({...product.value, quentity: 1});
 }
+
 </script>
 
 <template>
@@ -48,7 +53,24 @@ function addToCart(){
     <!-- Add to cart -->
     <div class="flex items-center gap-16 mt-6">
       <h4 class="font-semibold text-gray-100 text-2xl">${{ parseFloat(product.price).toFixed(2) }}</h4>
-      <button @click="addToCart()"
+        
+      <div v-if="isInCart" class="flex gap-3 items-center justify-between px-2.5 font-semibold w-full text-center bg-cyan-500 text-white rounded py-1">
+          <button class="flex-shrink-0 w-5 h-5 rounded-full border border-white text-white flex items-center justify-center hover:bg-cyan-700 transition active:scale-90">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"/>
+            </svg>
+          </button>
+          {{ isInCart }} in Cart
+          <button class="flex-shrink-0 w-5 h-5 rounded-full border border-white text-white flex items-center justify-center hover:bg-cyan-700 transition active:scale-90">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+        </div>
+      
+      <button v-else @click="addToCart()"
           class="flex items-center justify-center font-semibold w-full text-center bg-cyan-500 text-white rounded-full py-1 hover:bg-cyan-600 transition active:scale-90">
         Add to Cart
       </button>
