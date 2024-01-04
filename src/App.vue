@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <main class="min-h-screen w-full pt-10 pb-20 flex items-center justify-center bg-gray-400">
+    <main class="min-h-screen w-full pt-10 pb-20 flex items-center justify-center bg-lime-500">
     <!-- Shop wrapper -->
     <div class="w-full max-w-md relative">
       <router-view></router-view>
