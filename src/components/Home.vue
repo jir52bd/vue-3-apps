@@ -1,5 +1,7 @@
 <script setup>
+import { useStore } from '../store/store';
 
+const store = useStore();
 </script>
 <template>
     <div>
@@ -9,7 +11,7 @@
         <!-- shop grid -->
   <div class="grid grid-cols-2 gap-5">
     <!-- single product if in cart -->
-    <div class="bg-cyan-700 rounded-lg overflow-hidden">
+    <!-- <div class="bg-cyan-700 rounded-lg overflow-hidden">
       <router-link to="/product">
         <img src="/images/black_car.jpg" class="h-40 object-cover">
       </router-link>
@@ -36,19 +38,19 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- single product end -->
     <!-- single product -->
-    <div v-for="n in 3" class="bg-cyan-700 rounded-lg overflow-hidden">
-      <router-link to="/product">
-        <img src="/images/green_car.jpg" class="h-40 object-cover">
+    <div v-for="product in store.products" :key="product.id" class="bg-cyan-700 rounded-lg overflow-hidden">
+      <router-link :to="{name: 'Product', params:{id: product.id}}">
+        <img :src="product.image" class="h-40 object-cover">
       </router-link>
       <div class="p-4">
-        <router-link to="/product"  class="block mb-1 text-white font-semibold text-xl">
-          Car Name
+        <router-link :to="{name: 'Product', params: {id: product.id}}"  class="block mb-1 text-white font-semibold text-xl">
+          {{ product.name }}
         </router-link>
         <h5 class="text-white mb-3">
-          $40.00
+          {{ parseFloat(product.price).toFixed(2) }}
         </h5>
         <button class="flex items-center justify-center font-semibold w-full text-center bg-cyan-500 text-white rounded py-1 hover:bg-cyan-600 transition active:scale-90">
           Add to Cart

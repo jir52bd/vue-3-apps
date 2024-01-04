@@ -5,10 +5,24 @@ import Contact from "../components/Contact.vue";
 import Product from "../components/Product.vue";
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/about", component: About },
-  { path: "/contact", component: Contact },
-  { path: "/product", component: Product },
+  {
+     path: "/", 
+     component: Home
+  },
+  { 
+    path: "/about", 
+    component: About 
+  },
+  { 
+    path: "/contact", 
+    component: Contact 
+  },
+  { 
+    path: '/product/:id',
+    name: 'Product', 
+    component: Product,
+    pops: true 
+  },
 ];
 
 const router = createRouter({
