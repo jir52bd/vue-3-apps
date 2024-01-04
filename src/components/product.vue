@@ -11,6 +11,10 @@ const props = defineProps({
 
 const product = ref(store.products.find(prod => prod.id == props.id))
 console.log(product);
+
+function addToCart(){
+    store.addToCart({...product.value, quentity: 1})
+}
 </script>
 
 <template>
@@ -44,7 +48,7 @@ console.log(product);
     <!-- Add to cart -->
     <div class="flex items-center gap-16 mt-6">
       <h4 class="font-semibold text-gray-100 text-2xl">${{ parseFloat(product.price).toFixed(2) }}</h4>
-      <button
+      <button @click="addToCart()"
           class="flex items-center justify-center font-semibold w-full text-center bg-cyan-500 text-white rounded-full py-1 hover:bg-cyan-600 transition active:scale-90">
         Add to Cart
       </button>
