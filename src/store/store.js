@@ -39,6 +39,23 @@ export const useStore = defineStore('alerts', {
     actions: {
         addToCart(product){
         this.cart.push(product)
-      }
+      },
+      increaseCart(id) {
+        let itemIndex = this.cart.findIndex(item => item.id === id)
+        this.cart[itemIndex].quantity += 1
+    },
+    decreaseCart(id) {
+        let itemIndex = this.cart.findIndex(item => item.id === id)
+        if (this.cart[itemIndex].quantity <= 1) {
+            this.removeCart(id)
+        } else {
+            this.cart[itemIndex].quantity -= 1
+        }
+    },
+    removeCart(id) {
+        let itemIndex = this.cart.findIndex(item => item.id === id)
+        this.cart.splice(itemIndex, 1)
+    }
+
     },
 })
