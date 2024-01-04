@@ -1,5 +1,16 @@
 <script setup>
+import { useStore } from "../store/store";
+import {ref} from "vue";
+import router from "../router/index.js";
 
+const store = useStore()
+
+const props = defineProps({
+  id: String
+})
+
+const product = ref(store.products.find(prod => prod.id == props.id))
+console.log(product);
 </script>
 
 <template>
@@ -15,25 +26,24 @@
     </router-link>
     <p class="text-gray-200">/</p>
     <p class="text-gray-200 text-sm">
-      Car Name
+      {{ product.name }}
     </p>
   </nav>
   <!-- Breadcrumbs end -->
 
   <!-- Product -->
   <div class="">
-    <img src="#" class="w-full h-60 object-cover rounded-lg">
+    <img :src="product.image" class="w-full h-60 object-cover rounded-lg">
     <h4 class="mt-4 text-gray-100 text-2xl font-semibold">
-      Car Name
+        {{ product.name }}
     </h4>
     <p class="text-gray-300 mt-2 text-sm">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid nesciunt numquam quae ratione repellendus.
-      Dignissimos odit perferendis porro quo rem.
+      {{ product.description }}
     </p>
 
     <!-- Add to cart -->
     <div class="flex items-center gap-16 mt-6">
-      <h4 class="font-semibold text-gray-100 text-2xl">$40.00</h4>
+      <h4 class="font-semibold text-gray-100 text-2xl">${{ parseFloat(product.price).toFixed(2) }}</h4>
       <button
           class="flex items-center justify-center font-semibold w-full text-center bg-cyan-500 text-white rounded-full py-1 hover:bg-cyan-600 transition active:scale-90">
         Add to Cart
